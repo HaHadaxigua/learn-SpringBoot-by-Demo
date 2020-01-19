@@ -19,12 +19,12 @@ public class SpringBootConsumingRestfulWebServiceApplication {
     }
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder){
+    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder.build();
     }
 
     @Bean
-    public CommandLineRunner run(RestTemplate restTemplate)throws Exception{
+    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return args -> {
             Quote quote = restTemplate.getForObject(
                     "https://gturnquist-quoters.cfapps.io/api/random", Quote.class
