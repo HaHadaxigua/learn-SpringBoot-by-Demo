@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
  */
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     private static final Logger log = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
+
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
@@ -36,7 +37,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         var authentication = getAuthentication(request);
         // if there is no authentication in request, let it go
-        if (null == authentication){
+        if (null == authentication) {
             chain.doFilter(request, response);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -45,12 +46,13 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     /**
      * obtain authentication from request
+     *
      * @param request
      * @return
      */
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         var token = request.getHeader(SecurityConstants.TOKEN_HEADER);
-        if(StringUtils.isNotEmpty(token) && token.startsWith(SecurityConstants.TOKEN_PREFIX)){
+        if (StringUtils.isNotEmpty(token) && token.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             try {
                 var signKeySecret = SecurityConstants.TOKEN_SECRET.getBytes();
                 var parsedToken = Jwts.parser()
@@ -60,14 +62,14 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                         .getBody()
                         .getSubject();  // because we set username in the subject at previous filter
 
-                var authorities = ((List<?>)parsedToken.getBody()
+                var authorities = ((List<?>) parsedToken.getBody()
                         .get("rol")).stream()
                         .map(authority -> new SimpleGrantedAuthority((String) authority))
                         .collect(Collectors.toList());
 
                 if (StringUtils.isNotEmpty(username))
                     return new UsernamePasswordAuthenticationToken(username, null, authorities);
-            }catch (ExpiredJwtException exception) {
+            } catch (ExpiredJwtException exception) {
                 log.warn("Request to parse expired JWT : {} failed : {}", token, exception.getMessage());
             } catch (UnsupportedJwtException exception) {
                 log.warn("Request to parse unsupported JWT : {} failed : {}", token, exception.getMessage());

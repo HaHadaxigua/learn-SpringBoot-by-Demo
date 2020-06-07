@@ -15,20 +15,21 @@ public class LogAopAdviseDefine {
 
     // 定义一个 Pointcut, 使用 切点表达式函数 来描述对哪些 Join point 使用 advise.
     @Pointcut("within(NeedLogService)")
-    public void pointcut(){}
+    public void pointcut() {
+    }
 
     @Before("pointcut()")
-    public void logMethodInvokeParam(JoinPoint joinPoint){
+    public void logMethodInvokeParam(JoinPoint joinPoint) {
         logger.info("---Before method {} invoke, param: {}---", joinPoint.getSignature().toShortString(), joinPoint.getArgs());
     }
 
     @AfterReturning(pointcut = "pointcut()", returning = "retVal")
-    public void logMethodInvokeResult(JoinPoint joinPoint, Object retVal){
+    public void logMethodInvokeResult(JoinPoint joinPoint, Object retVal) {
         logger.info("---After method {} invoke, result: {}---", joinPoint.getSignature().toShortString(), joinPoint.getArgs());
     }
 
     @AfterThrowing(pointcut = "pointcut()", throwing = "exception")
-    public void logMethodInvokeException(JoinPoint joinPoint, Exception exception){
+    public void logMethodInvokeException(JoinPoint joinPoint, Exception exception) {
         logger.info("---method {} invoke exception: {}---", joinPoint.getSignature().toShortString(), exception.getMessage());
     }
 }

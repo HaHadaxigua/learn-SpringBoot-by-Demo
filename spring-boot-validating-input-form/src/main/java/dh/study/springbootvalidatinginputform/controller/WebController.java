@@ -20,12 +20,12 @@ public class WebController implements WebMvcConfigurer {
     }
 
     @GetMapping("/")
-    public String showForm(Person person){
+    public String showForm(Person person) {
         return "index";
     }
 
     @PostMapping("/")
-    public String checkPersonInfo(@Valid Person person, BindingResult bindingResult){
+    public String checkPersonInfo(@Valid Person person, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "index";
 

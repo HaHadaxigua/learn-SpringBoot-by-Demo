@@ -16,7 +16,7 @@ public class ScheduledTasks {
     public static final SimpleDateFormat dataFormat = new SimpleDateFormat("HH:mm:ss");
 
     @Scheduled(fixedRate = 5000)    // 从开始调用计算时间
-    public void reportCurrentTime(){
-        log.info("This time is now{}",dataFormat.format(new Date()));
+    public void reportCurrentTime() {
+        log.info("This time is now{}", dataFormat.format(new Date()));
     }
 }

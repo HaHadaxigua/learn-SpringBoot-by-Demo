@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class ExceptionController {
     @GetMapping("/illegalArgumentException")
-    public void throwException(){
+    public void throwException() {
         throw new IllegalArgumentException();
     }
 
-    public void throwException2(){
+    public void throwException2() {
         throw new ResourceNotFoundException();
     }
 }

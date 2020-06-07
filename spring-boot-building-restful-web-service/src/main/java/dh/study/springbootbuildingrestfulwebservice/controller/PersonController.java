@@ -15,12 +15,12 @@ public class PersonController {
     private ArrayList<Person> list = new ArrayList<>();
 
     @GetMapping(path = "/all")
-    private ArrayList<Person> showAll(){
+    private ArrayList<Person> showAll() {
         return list;
     }
 
     @PostMapping(path = "/add")
-    private ArrayList<Person> addPerson(@RequestParam(name = "name") String name){
+    private ArrayList<Person> addPerson(@RequestParam(name = "name") String name) {
         list.add(new Person(counter.incrementAndGet(), String.format(template, name)));
         return list;
     }

@@ -1,7 +1,6 @@
 package dh.study.springbootuploadingfiles.configuration;
 
 
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 

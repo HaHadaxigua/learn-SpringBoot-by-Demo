@@ -19,7 +19,7 @@ public class TestJsonController {
 
     @RequestMapping(path = "/getUser")
     @ResponseBody
-    public User getUser(){
+    public User getUser() {
         User user = new User();
         user.setName("mrbird");
         user.setBirthday(new Date());
@@ -28,6 +28,7 @@ public class TestJsonController {
 
     /**
      * 对象序列化
+     *
      * @return
      * @throws JsonProcessingException
      */
@@ -40,8 +41,10 @@ public class TestJsonController {
         return mapper.writeValueAsString(u);
     }
 
-    /**反序列化
+    /**
+     * 反序列化
      * 当采用树遍历的方式时，JSON被读入到JsonNode对象中，可以像操作XML DOM那样读取JSON。
+     *
      * @return
      * @throws JsonProcessingException
      */
@@ -49,18 +52,20 @@ public class TestJsonController {
     @ResponseBody
     public String readJsonString() throws JsonProcessingException {
 //        String json = "{\"name\":\"dh\",\"age\":\"22\"}";
-        String json = "{\"name\":\"mrbird\",\"hobby\":{\"first\":\"sleep\",\"second\":\"eat\"}}";;
+        String json = "{\"name\":\"mrbird\",\"hobby\":{\"first\":\"sleep\",\"second\":\"eat\"}}";
+        ;
         JsonNode node = this.mapper.readTree(json);
         String name = node.get("name").asText();
         int age = node.get("age").asInt();
         // 多级Json的情况
         JsonNode hobby = node.get("hobby");
         String first_hobby = hobby.get("first").asText();
-        return name +" "+age;
+        return name + " " + age;
     }
 
     /**
      * 将Json与对象进行绑定
+     *
      * @return
      * @throws JsonProcessingException
      */
@@ -71,7 +76,7 @@ public class TestJsonController {
         User user = mapper.readValue(json, User.class);
         String name = user.getName();
         int age = user.getAge();
-        return name+""+age;
+        return name + "" + age;
     }
 
 }

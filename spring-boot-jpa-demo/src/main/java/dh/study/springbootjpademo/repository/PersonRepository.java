@@ -20,13 +20,14 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByAgeGreaterThan(int age);
 
     @Query("SELECT p FROM Person p where p.name=:name")
-    Optional<Person> findByNameCustomQuery(@Param("name")String name);
+    Optional<Person> findByNameCustomQuery(@Param("name") String name);
 
     @Query("SELECT p.name FROM Person p where p.id=:id")
     Optional<Person> findPersonNameById(@Param("id") Long id);
 
     /**
      * 自定义更新语句
+     *
      * @param name
      * @param id
      */

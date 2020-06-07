@@ -1,0 +1,10 @@
+server:
+  port: 8889
+spring:
+# redis\u57FA\u7840\u914D\u7F6E
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3000
+#    password:

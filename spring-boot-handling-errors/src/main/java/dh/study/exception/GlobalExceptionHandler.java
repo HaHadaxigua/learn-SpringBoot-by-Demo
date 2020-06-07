@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
     ErrorResponse illegalArgumentResponse = new ErrorResponse(new IllegalArgumentException());
     ErrorResponse resourceNotFoundResponse = new ErrorResponse(new ResourceNotFoundException());
 
-    public ResponseEntity<ErrorResponse> exceptionHandler(Exception e){
+    public ResponseEntity<ErrorResponse> exceptionHandler(Exception e) {
         if (e instanceof IllegalArgumentException) {
             return ResponseEntity.status(400).body(illegalArgumentResponse);
         } else if (e instanceof ResourceNotFoundException) {

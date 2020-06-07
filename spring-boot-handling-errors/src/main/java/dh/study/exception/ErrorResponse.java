@@ -10,7 +10,7 @@ public class ErrorResponse {
     private String message;
     private String errorTypeName;
 
-    public ErrorResponse(Exception e){
+    public ErrorResponse(Exception e) {
         this(e.getClass().getName(), e.getMessage());
     }
 

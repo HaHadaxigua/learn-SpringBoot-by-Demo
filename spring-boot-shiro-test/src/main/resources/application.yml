@@ -1,0 +1,27 @@
+server:
+  port: 8443
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/test
+    username: root
+    password: 123456
+  # 打印sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+  main:
+    allow-bean-definition-overriding: true
+shiro:
+  sessionManager:
+    sessionIdCookieEnabled: true
+    sessionIdUrlRewritingEnabled: true
+  unauthorizedUrl: /unauthorizedurl
+  web:
+    enabled: true
+  successUrl: /index
+  loginUrl: /login

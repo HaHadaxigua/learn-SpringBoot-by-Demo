@@ -25,7 +25,7 @@ public class FileUploadController {
     }
 
     @GetMapping(path = "/")
-    public String listFiles(Model model)throws Exception{
+    public String listFiles(Model model) throws Exception {
         model.addAttribute("files", storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                         "serverFile", path.getFileName().toString()).build().toString())
@@ -37,20 +37,20 @@ public class FileUploadController {
 
     @GetMapping(path = "/file/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serverFile(@PathVariable String filename){
+    public ResponseEntity<Resource> serverFile(@PathVariable String filename) {
         Resource file = storageService.loadAsResource(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\""+file.getFilename())
-                                  .body(file);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename())
+                .body(file);
     }
 
     @PostMapping(path = "/")
-    public String handleUploadFile(@RequestParam("file") MultipartFile file){
+    public String handleUploadFile(@RequestParam("file") MultipartFile file) {
         storageService.store(file);
         return "redirect: /";
     }
 
     @ExceptionHandler(StorageResolverException.class)
-    public ResponseEntity<?> handleStorageFileNotFind(StorageResolverException exc){
+    public ResponseEntity<?> handleStorageFileNotFind(StorageResolverException exc) {
         return ResponseEntity.notFound().build();
     }
 }

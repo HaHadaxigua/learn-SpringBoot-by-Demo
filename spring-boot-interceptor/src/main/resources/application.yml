@@ -1,0 +1,27 @@
+server:
+  port: 8443
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/test
+    username: root
+    password: 123456
+  # 打印sql语句
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect   # 创建的表的 ENGINE 为 InnoDB
+
+# 配置shiro
+shiro:
+  sessionManager:
+    sessionIdCookieEnabled: true          # 是否允许将sessionId 放到 cookie 中
+    sessionIdUrlRewritingEnabled: true    # 是否允许将 sessionId 放到 Url 地址拦中
+  unauthorizedUrl: /unauthorizedurl       # 第三行表示访问未获授权的页面时，默认的跳转路径
+  web:
+    enabled: true                         # 第四行表示开启 shiro
+  successUrl: /index                      # 登陆成功的跳转页面
+  loginUrl: /login                        # 登陆页面

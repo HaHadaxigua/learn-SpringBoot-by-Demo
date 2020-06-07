@@ -56,6 +56,6 @@ public class User {
     }
 
     public void setStatus(String status) {
-        this.status = status == null? null: status.trim();   // trim()返回字符串 str 去除首尾空白字符后的结果。
+        this.status = status == null ? null : status.trim();   // trim()返回字符串 str 去除首尾空白字符后的结果。
     }
 }

@@ -29,12 +29,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     /**
      * 尝试认证
+     *
      * @param request
      * @param response
      * @return
      */
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response){
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         var username = request.getParameter("username");
         var password = request.getParameter("password");
         var authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -43,8 +44,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     /**
      * if authentication successful, then the filter will create a JWT token and returns it in HTTP Authorization header.
-     * @param request       http's request
-     * @param response      http's response
+     *
+     * @param request    http's request
+     * @param response   http's response
      * @param chain
      * @param authResult
      * @throws IOException
@@ -52,7 +54,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        var user = (User)authResult.getPrincipal();
+        var user = (User) authResult.getPrincipal();
         var roles = user.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)

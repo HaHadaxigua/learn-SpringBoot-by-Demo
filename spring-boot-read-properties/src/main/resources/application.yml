@@ -1,0 +1,21 @@
+# spring 多环境
+spring:
+  profiles:
+    active: test
+
+person:
+  name: zrx
+  age: 18
+  map: {k1: v1, k2: v2}
+  list:
+    - music
+    - code
+    - swimming
+  email: 123@qq.com
+
+---
+# 第二个配置模块 名字为test
+spring:
+  profiles: test
+server:
+  port: 8081
